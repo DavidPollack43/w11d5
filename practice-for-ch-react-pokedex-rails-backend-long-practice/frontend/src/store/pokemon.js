@@ -1,4 +1,5 @@
 import { postPokeman } from '../components/CreatePokemonForm';
+import { updatePokeman } from '../components/EditPokemonForm';
 import { LOAD_ITEMS, REMOVE_ITEM, ADD_ITEM } from './items';
 
 const LOAD = 'pokemon/LOAD';
@@ -33,6 +34,11 @@ export const getPokeman = (id) => async (dispatch) => {
 export const createPokeman = (pokeman) => async (dispatch) => {
   const newPokeman = await postPokeman(pokeman);
   dispatch(addOnePokemon(newPokeman));
+}
+
+export const editPokeman = (pokeman) => async (dispatch) => {
+  const editedPokeman = await updatePokeman(pokeman);
+  dispatch(addOnePokemon(editedPokeman))
 }
 
 export const getPokemon = () => async dispatch => {
