@@ -1,3 +1,5 @@
+import { updateItem } from "../components/ItemForm";
+
 export const LOAD_ITEMS = "items/LOAD_ITEMS";
 export const UPDATE_ITEM = "items/UPDATE_ITEM";
 export const REMOVE_ITEM = "items/REMOVE_ITEM";
@@ -32,6 +34,11 @@ export const getPokemanItems = (id) => async (dispatch) => {
     const items = await res.json();
     dispatch(load(items, id))
   }
+}
+
+export const editItem = (item) => async (dispatch) => {
+  const editedItem = await updateItem(item);
+  dispatch(update(editedItem));
 }
 
 const initialState = {};

@@ -1,5 +1,21 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { editItem } from '../store/items';
+
+export const updateItem = async (item) => {
+  const res = await fetch(`/api/items/${item.id}`, {
+    method: "PATCH",
+    body: JSON.stringify(item),
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }
+  });
+  const data = res.json();
+  return data;
+}
+
+
 
 const ItemForm = ({ itemId, hideForm }) => {
   let item = useSelector(state => state.items[itemId]);
@@ -11,21 +27,24 @@ const ItemForm = ({ itemId, hideForm }) => {
   const updateName = (e) => setName(e.target.value);
   const updateHappiness = (e) => setHappiness(e.target.value);
   const updatePrice = (e) => setPrice(e.target.value);
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // const payload = {
-    //   ...item,
-    //   name,
-    //   happiness,
-    //   price
-    // };
+    const payload = {
+      ...item,
+      name,
+      happiness,
+      price
+    };
     
     let returnedItem;
     if (returnedItem) {
       hideForm();
     }
+    
+    dispatch(editItem(payload))
   };
 
   const handleCancelClick = (e) => {
