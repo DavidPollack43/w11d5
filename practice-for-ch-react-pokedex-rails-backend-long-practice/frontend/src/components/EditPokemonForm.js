@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPokemonTypes } from '../store/pokemon';
 
+export const update
+
 const EditPokemonForm = ({ pokemon, hideForm }) => {
   const pokeTypes = useSelector(state => state.pokemon.types);
   const dispatch = useDispatch();

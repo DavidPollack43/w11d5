@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import PokemonDetail from './PokemonDetail';
 import CreatePokemonForm from './CreatePokemonForm';
 import Fab from './Fab';
-import { getPokemon } from '../store/pokemon';
+import { getPokeman, getPokemon } from '../store/pokemon';
 
 const PokemonBrowser = () => {
   const { pokemonId } = useParams();
@@ -21,6 +21,10 @@ const PokemonBrowser = () => {
   useEffect(() => {
     dispatch(getPokemon());
   }, []); 
+
+  useEffect(() => {
+    dispatch(getPokeman(pokemonId))
+  }, [pokemonId])
 
   if (!pokemon) {
     return null;

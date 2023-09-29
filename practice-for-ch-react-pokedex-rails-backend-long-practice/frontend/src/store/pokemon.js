@@ -1,3 +1,4 @@
+import { postPokeman } from '../components/CreatePokemonForm';
 import { LOAD_ITEMS, REMOVE_ITEM, ADD_ITEM } from './items';
 
 const LOAD = 'pokemon/LOAD';
@@ -18,6 +19,21 @@ const addOnePokemon = pokemon => ({
   type: ADD_ONE,
   pokemon
 });
+
+export const getPokeman = (id) => async (dispatch) => {
+  // debugger
+  const res = await fetch(`/api/pokemon/${id}`);
+
+  if (res.ok) {
+    const pokeman = await res.json();
+    dispatch(addOnePokemon(pokeman));
+  }
+};
+
+export const createPokeman = (pokeman) => async (dispatch) => {
+  const newPokeman = await postPokeman(pokeman);
+  dispatch(addOnePokemon(newPokeman));
+}
 
 export const getPokemon = () => async dispatch => {
   const response = await fetch(`/api/pokemon`);
